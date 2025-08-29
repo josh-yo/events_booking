@@ -34,3 +34,11 @@ This project is developed as part of **Programming 2 Final Project** at Griffith
 5. Visit: http://yourlocalhost:8000
 
 ---
+
+## Note
+
+1. Reset and reseed database
+   ```bash
+   php artisan migrate:fresh --seed
+
+---

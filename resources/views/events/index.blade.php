@@ -9,6 +9,7 @@
 <body>
     <x-navbar />
 
+
     <h1>Upcoming Events</h1>
     <table class="table table-striped">
         <thead>
@@ -16,14 +17,16 @@
                 <th>Title</th>
                 <th>Date</th>
                 <th>Location</th>
+                <th>Capacity</th>
             </tr>
         </thead>
         <tbody>
             @foreach($events as $event)
                 <tr>
-                    <td>{{ $event['title'] }}</td>
-                    <td>{{ $event['date_time'] }}</td>
-                    <td>{{ $event['location'] }}</td>
+                    <td>{{ $event->title }}</td>
+                    <td>{{ $event->date_time }}</td>
+                    <td>{{ $event->location }}</td>
+                    <td>{{ $event->capacity }}</td>
                 </tr>
             @endforeach
         </tbody>
