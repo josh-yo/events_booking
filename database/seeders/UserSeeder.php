@@ -14,12 +14,19 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-         // organiser
+        // organiser
         User::create([
-            'name' => 'Organiser One',
-            'email' => 'organiser1@test.com',
-            'password' => Hash::make('password'),
-            'user_type' => 'organiser',
+            'name' => 'Organiser 1',
+            'email' => 'organiser01@test.com',
+            'password' => Hash::make('password01'),
+            'user_type' => 'Organiser',
+        ]);
+
+        User::create([
+            'name' => 'Organiser 2',
+            'email' => 'organiser02@test.com',
+            'password' => Hash::make('password02'),
+            'user_type' => 'Organiser',
         ]);
 
         // attendee
