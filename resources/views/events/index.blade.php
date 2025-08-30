@@ -1,36 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Home Page</title>
-</head>
-<body>
-    <x-navbar />
-
-
+@extends('layouts.app')
+@section('content')
     <h1>Upcoming Events</h1>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Date</th>
-                <th>Location</th>
-                <th>Capacity</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($events as $event)
-                <tr>
-                    <td>{{ $event->title }}</td>
-                    <td>{{ $event->date_time }}</td>
-                    <td>{{ $event->location }}</td>
-                    <td>{{ $event->capacity }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</body>
-</html>
+
+    <div class="row">
+        @foreach($events as $event)
+            <div class="col-md-3 mb-3">
+                <div class="card h-100 shadow-sm">
+                    <!-- <img src="{{ $event->image_path ?? 'https://picsum.photos/400/200?random='.$event->id }}" class="card-img-top" alt="{{ $event->title }}"> -->
+                    <img src="{{ $event->image_path }}" 
+                        onerror="this.onerror=null;this.src='{{ asset('images/default.jpg') }}';" 
+                        class="card-img-top" 
+                        style="height:200px;object-fit:cover;" 
+                        alt="{{ $event->title }}">
+
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $event->title }}</h5>
+                        <p class="card-text">{{ $event->location }} <br> {{ $event->date_time }}</p>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+@endsection
