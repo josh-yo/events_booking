@@ -8,24 +8,43 @@
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto">
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Create Event</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Dashboard</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">My Bookings</a>
-            </li>
+            <!-- Show user-specific links -->
+            @auth
+                @if(Auth::user()->user_type === 'Organiser')
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Create Event</a>
+                    </li>
+                @endif
+
+                @if(Auth::user()->user_type === 'Attendee')
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">My Bookings</a>
+                    </li>
+                @endif
+            @endauth
         </ul>
 
         <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Register</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
-        </ul>
+            @guest
+                <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+            @else
+                <div class="d-flex align-items-center">
+                    <span class="navbar-text text-light me-3">
+                        {{ Auth::user()->name }}
+                        <span class="badge bg-primary">{{ Auth::user()->user_type }}</span>
+                    </span>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-link nav-link" style="display:inline; cursor:pointer;">
+                            Logout
+                        </button>
+                    </form>
+                </div>
+            @endguest
+    </ul>
         </div>
     </div>
 </nav>

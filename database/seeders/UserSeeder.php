@@ -16,14 +16,14 @@ class UserSeeder extends Seeder
     {
         // organiser
         User::create([
-            'name' => 'Organiser 1',
+            'name' => 'Wanda Maximoff',
             'email' => 'organiser01@test.com',
             'password' => Hash::make('password01'),
             'user_type' => 'Organiser',
         ]);
 
         User::create([
-            'name' => 'Organiser 2',
+            'name' => 'Agatha Harkness',
             'email' => 'organiser02@test.com',
             'password' => Hash::make('password02'),
             'user_type' => 'Organiser',
@@ -31,10 +31,10 @@ class UserSeeder extends Seeder
 
         // attendee
         User::create([
-            'name' => 'Attendee One',
-            'email' => 'attendee1@test.com',
+            'name' => 'Chris Hemsworth',
+            'email' => 'attendee01@test.com',
             'password' => Hash::make('password'),
-            'user_type' => 'attendee',
+            'user_type' => 'Attendee',
         ]);
     }
 }
