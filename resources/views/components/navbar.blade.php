@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Events Booking</a>
+        <a class="navbar-brand" href="{{ route('events.index') }}">Events Booking</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -8,13 +8,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="{{ route('events.index') }}">Home</a>
             </li>
             <!-- Show user-specific links -->
             @auth
                 @if(Auth::user()->user_type === 'Organiser')
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Create Event</a>
+                        <a class="nav-link" href="{{ route('events.createEvent') }}">Create Event</a>
                     </li>
                 @endif
 
