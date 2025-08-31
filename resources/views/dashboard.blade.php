@@ -43,6 +43,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="mt-4 d-flex justify-content-center">
+            {{ $events->links() }}
+        </div>
     </div>
 
     <!-- Mobile Version -->
@@ -66,6 +69,9 @@
                 </div>
             </div>
         @endforeach
+        <div class="mt-4 d-flex justify-content-center">
+            {{ $events->links() }}
+        </div>
     </div>
 
 @endsection

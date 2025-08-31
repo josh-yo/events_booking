@@ -16,12 +16,13 @@ class OrganiserController extends Controller
         $events = DB::table('events')
         ->select('id', 'title', 'date_time', 'capacity')
         ->where('organiser_id', $userId)
-        ->get()
-        ->map(function ($event) {
-            $event->bookings = 0; // fixed number for test
-            $event->remaining = $event->capacity; // capacity - 0
-            return $event;
-        });
+        ->orderBy('date_time', 'asc')
+        ->paginate(8);
+
+        foreach ($events as $event) {
+            $event->bookings = 0;
+            $event->remaining = $event->capacity;
+        }
 
         return view('dashboard', compact('events'));
     }
