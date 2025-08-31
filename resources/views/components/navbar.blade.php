@@ -16,6 +16,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('events.createEvent') }}">Create Event</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+                    </li>
                 @endif
 
                 @if(Auth::user()->user_type === 'Attendee')

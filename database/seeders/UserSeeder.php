@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
     {
         // organiser
         User::create([
+            'id' => 1,
             'name' => 'Wanda Maximoff',
             'email' => 'organiser01@test.com',
             'password' => Hash::make('password01'),
@@ -23,6 +24,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 2,
             'name' => 'Agatha Harkness',
             'email' => 'organiser02@test.com',
             'password' => Hash::make('password02'),
@@ -31,6 +33,7 @@ class UserSeeder extends Seeder
 
         // attendee
         User::create([
+            'id' => 3,
             'name' => 'Chris Hemsworth',
             'email' => 'attendee01@test.com',
             'password' => Hash::make('password'),
