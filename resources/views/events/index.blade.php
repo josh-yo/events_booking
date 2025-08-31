@@ -14,7 +14,7 @@
 
                     <div class="card-body">
                         <h5 class="card-title">{{ $event->title }}</h5>
-                        <p class="card-text">{{ $event->location }} <br> {{ $event->date_time }}</p>
+                        <p class="card-text">{{ $event->location }} <br> {{ \Carbon\Carbon::parse($event->date_time)->format('Y-m-d H:i') }} </p>
                     </div>
                 </div>
             </div>

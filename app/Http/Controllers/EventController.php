@@ -14,4 +14,35 @@ class EventController extends Controller
         $events = Event::orderBy('date_time', 'asc')->paginate(8); 
         return view('events.index', compact('events'));
     }
+
+    // Show the form for creating a new event
+    public function create()
+    {
+        return view('events.createEvent');
+    }
+
+    // Store a newly created event in storage
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title'       => 'required|max:100',
+            'description' => 'nullable|string',
+            'date_time'   => 'required|date|after:now',
+            'location'    => 'required|max:255',
+            'capacity'    => 'required|integer|min:1|max:1000',
+            'image_path'  => 'nullable|url', // New validation rule for image URL
+            'tags' => 'required|in:indoor,outdoor',
+        ]);
+
+        // Add the currently logged-in Organiser ID
+        $validated['organiser_id'] = auth()->id();
+
+        // Create the new event
+        Event::create($validated);
+
+        return redirect()->route('dashboard')
+                         ->with('success', 'Event created successfully!');
+    }
+
+
 }

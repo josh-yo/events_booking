@@ -3,37 +3,106 @@
 @section('content')
 <div class="container py-4">
     <h2>Create Event</h2>
-    <form>
+    <form method="POST" action="{{ route('events.store') }}">
         @csrf
+
+        <!-- Display validation errors -->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="mb-3">
-            <label for="title" class="form-label">Event Title</label>
-            <input type="text" class="form-control" id="title" name="title" placeholder="Enter event title">
+            <label for="title" class="form-label"><span class="text-danger">*</span>Event Title</label>
+            <input type="text"
+                class="form-control @error('title') is-invalid @enderror"
+                id="title"
+                name="title"
+                value="{{ old('title') }}"
+                placeholder="Enter event title">
+            @error('title')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" name="description" rows="3" placeholder="Optional"></textarea>
+            <textarea class="form-control"
+                id="description"
+                name="description"
+                rows="3"
+                placeholder="Optional">{{ old('description') }}</textarea>
         </div>
 
         <div class="mb-3">
-            <label for="date" class="form-label">Date & Time</label>
-            <input type="datetime-local" class="form-control" id="date" name="date">
+            <label for="date" class="form-label"><span class="text-danger">*</span>Date & Time</label>
+            <input type="datetime-local"
+                class="form-control @error('date_time') is-invalid @enderror"
+                id="date_time"
+                name="date_time"
+                value="{{ old('date_time') }}">
+            @error('date_time')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
-            <label for="location" class="form-label">Location</label>
-            <input type="text" class="form-control" id="location" name="location" placeholder="Enter location">
+            <label for="location" class="form-label"><span class="text-danger">*</span>Location</label>
+            <input type="text"
+                class="form-control @error('location') is-invalid @enderror"
+                id="location"
+                name="location"
+                value="{{ old('location') }}"
+                placeholder="Enter location">
+            @error('location')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
-            <label for="capacity" class="form-label">Capacity</label>
-            <input type="number" class="form-control" id="capacity" name="capacity" min="1" max="1000">
+            <label for="capacity" class="form-label"><span class="text-danger">*</span>Capacity (between 1 and 100)</label>
+            <input type="number"
+                class="form-control @error('capacity') is-invalid @enderror"
+                id="capacity"
+                name="capacity"
+                value="{{ old('capacity') }}"
+                min="1" max="1000">
+            @error('capacity')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label for="image_path" class="form-label">Image URL</label>
-            <input type="url" class="form-control" id="image_path" name="image_path" placeholder="https://example.com/image.jpg">
+            <input type="url"
+                class="form-control @error('image_path') is-invalid @enderror"
+                id="image_path"
+                name="image_path"
+                value="{{ old('image_path') }}"
+                placeholder="https://example.com/image.jpg">
+            @error('image_path')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
         </div>
+
+        <div class="mb-3">
+            <label for="tags" class="form-label"><span class="text-danger">*</span>Tags</label>
+            <select class="form-select @error('tags') is-invalid @enderror"
+                    id="tags" name="tags">
+                <option value="">-- Select a Tag --</option>
+                <option value="indoor" {{ old('tags') == 'indoor' ? 'selected' : '' }}>Indoor</option>
+                <option value="outdoor" {{ old('tags') == 'outdoor' ? 'selected' : '' }}>Outdoor</option>
+            </select>
+            @error('tags')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
 
         <button type="submit" class="btn btn-primary">Create Event</button>
     </form>
