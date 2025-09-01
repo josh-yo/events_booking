@@ -40,10 +40,11 @@ class EventController extends Controller
         $validated['organiser_id'] = auth()->id();
 
         // Create the new event
-        Event::create($validated);
+        $event = Event::create($validated);
 
         return redirect()->route('dashboard')
-                         ->with('success', 'Event created successfully!');
+                        ->with('title', $event->title)
+                        ->with('success', "created successfully!");
     }
 
     public function destroy($id)
