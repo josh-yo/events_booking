@@ -10,13 +10,19 @@
               @foreach($chunk as $rec)
                 <div class="col-12 col-md-6 mb-4">
                   <div class="card h-100 shadow-sm mx-2">
+                    <a href="{{ route('events.show', $rec->id) }}">
                     <img src="{{ $rec->image_path }}"
                          onerror="this.onerror=null;this.src='{{ asset('images/default.jpg') }}';"
                          class="card-img-top"
                          style="height:220px; object-fit:cover;"
                          alt="{{ $rec->title }}">
+                    </a>
                     <div class="card-body text-center">
-                      <h5 class="card-title fw-bold">{{ $rec->title }}</h5>
+                      
+                      <h3 class="card-title fw-bold event_title">
+                        <a href="{{ route('events.show', $rec->id) }}" class="text-decoration-none text-dark">{{ $rec->title }}</a>
+                      </h3>
+                      
                       <p class="card-text text-muted mb-1">
                         <i class="bi bi-calendar-event"></i> {{ \Carbon\Carbon::parse($rec->date_time)->format('Y-m-d H:i') }}
                       </p>
