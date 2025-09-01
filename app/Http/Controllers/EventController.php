@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -44,5 +46,19 @@ class EventController extends Controller
                          ->with('success', 'Event created successfully!');
     }
 
+    public function destroy($id)
+    {
+        $event = DB::table('events')
+            ->where('id', $id)
+            ->where('organiser_id', Auth::id()) // Ensure only the owner can delete
+            ->first();
 
+        if (!$event) {
+            return redirect()->route('dashboard')->with('error', 'Event not found or unauthorized.');
+        }
+
+        DB::table('events')->where('id', $id)->delete();
+
+        return redirect()->route('dashboard')->with('success', "Event \"$event->title\" deleted successfully!");
+    }
 }

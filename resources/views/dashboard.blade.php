@@ -1,4 +1,17 @@
 @extends('layouts.app', ['containerClass' => 'container-fluid mt-4'])
+@if(session('success'))
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
+  <div id="deleteToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        {{ session('success') }}
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+@endif
+
 
 @section('content')
     <h3>Event List</h3>
@@ -33,10 +46,22 @@
                         <td>{{ $event->remaining }}</td>
                         <td>
                             <a href="{{ url('/events/'.$event->id.'/edit') }}" class="btn btn-primary btn-sm">Edit</a>
-                            <form action="{{ url('/events/'.$event->id) }}" method="POST" class="d-inline">
+                            <form id="delete-form-{{ $event->id }}" 
+                                action="{{ url('/events/'.$event->id) }}" 
+                                method="POST" 
+                                class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-outline-danger btn-sm ms-2">Delete</button>
+                                <!-- Delete Button (only open modal) -->
+                                <button 
+                                    type="button" 
+                                    class="btn btn-outline-danger btn-sm ms-2"
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#deleteModal"
+                                    data-id="{{ $event->id }}"
+                                    data-title="{{ $event->title }}">
+                                    Delete
+                                </button>
                             </form>
                         </td>
                     </tr>
@@ -61,11 +86,16 @@
                         <strong>Remaining:</strong> {{ $event->remaining }}
                     </p>
                     <a href="{{ url('/events/'.$event->id.'/edit') }}" class="btn btn-sm btn-primary">Edit</a>
-                    <form action="{{ url('/events/'.$event->id) }}" method="POST" class="d-inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
-                    </form>
+                    <!-- Delete Button (only open modal) -->
+                    <button 
+                        type="button" 
+                        class="btn btn-outline-danger btn-sm ms-2"
+                        data-bs-toggle="modal" 
+                        data-bs-target="#deleteModal"
+                        data-id="{{ $event->id }}"
+                        data-title="{{ $event->title }}">
+                        Delete
+                    </button>
                 </div>
             </div>
         @endforeach
@@ -73,5 +103,6 @@
             {{ $events->links() }}
         </div>
     </div>
-
+    
+@include('components.delete_modal')
 @endsection

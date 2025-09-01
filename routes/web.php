@@ -22,6 +22,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [OrganiserController::class, 'dashboard'])
     ->middleware('auth')
     ->name('dashboard');
+
+    Route::delete('/events/{id}', [EventController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('events.destroy');
 });
 
 require __DIR__.'/auth.php';
