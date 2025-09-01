@@ -28,8 +28,8 @@
       <h2 class="fw-bold mb-3">{{ $event->title }}</h2>
       <p>{{ $event->description }}</p>
       <ul class="list-unstyled">
-        <li><strong>Date:</strong> {{ $event->date_time }}</li>
-        <li><strong>Time:</strong> {{ $event->time }}</li>
+        <li><strong>Date:</strong> {{ \Carbon\Carbon::parse($event->date_time)->format('d/M/Y') }}</li>
+        <li><strong>Time:</strong> {{ \Carbon\Carbon::parse($event->date_time)->format('g:i A') }}</li>
         <li><strong>Location:</strong> {{ $event->location }}</li>
         <li><strong>Capacity:</strong> {{ $event->capacity }}</li>
         <li><strong>Available Spots:</strong> {{ $availableSpots }}</li>

@@ -17,6 +17,7 @@
                 <tr>
                     <th>Event Title</th>
                     <th>Event Date</th>
+                    <th>Event Time</th>
                     <th>Total Capacity</th>
                     <th>Current Bookings</th>
                     <th>Remaining Spots</th>
@@ -27,7 +28,8 @@
                 @foreach ($events as $event)
                     <tr>
                         <td>{{ $event->title }}</td>
-                        <td>{{ \Carbon\Carbon::parse($event->date_time)->format('Y-m-d H:i') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($event->date_time)->format('d/M/Y') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($event->date_time)->format('g:i A') }}</td>
                         <td>{{ $event->capacity }}</td>
                         <td>{{ $event->bookings }}</td>
                         <td>{{ $event->remaining }}</td>
@@ -67,10 +69,13 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $event->title }}</h5>
                     <p class="card-text">
-                        <strong>Date:</strong> {{ \Carbon\Carbon::parse($event->date_time)->format('Y-m-d H:i') }}<br>
-                        <strong>Total Capacity:</strong> {{ $event->capacity }}<br>
-                        <strong>Bookings:</strong> {{ $event->bookings }}<br>
-                        <strong>Remaining:</strong> {{ $event->remaining }}
+                        <ul class="list-unstyled mb-0">
+                            <li><strong>Event Date:</strong> {{ \Carbon\Carbon::parse($event->date_time)->format('d/M/Y') }}</li>
+                            <li><strong>Event Time:</strong> {{ \Carbon\Carbon::parse($event->date_time)->format('g:i A') }}</li>
+                            <li><strong>Total Capacity:</strong> {{ $event->capacity }}</li>
+                            <li><strong>Bookings:</strong> {{ $event->bookings }}</li>
+                            <li><strong>Remaining:</strong> {{ $event->remaining }}</li>
+                        </ul>
                     </p>
                     <a href="{{ url('/events/'.$event->id.'/edit') }}" class="btn btn-sm btn-primary">Edit</a>
                     <!-- Delete Button (only open modal) -->

@@ -33,6 +33,27 @@
     cursor: not-allowed !important;
 }
 
+.date_time{
+    color: #d1410c;
+    font-weight: 600;
+}
+
+.list-unstyled>li {
+    margin-bottom: 0.5rem!important;
+}
+
+.table>:not(caption)>*>*{
+    padding: 1rem 1rem;
+}
+
+tr>th{
+    padding: 1rem 1rem!important;
+}
+
+tr>td{
+    padding: 1rem 1rem!important;
+}
+
 /* for recommended carousel */
 .carousel-control-custom {
     width: 8%;
