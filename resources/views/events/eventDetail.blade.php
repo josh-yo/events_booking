@@ -36,24 +36,31 @@
         <li><strong>Organiser:</strong> {{ $event->organiser->name }}</li>
       </ul>
 
-      <!-- Logic of Button -->
-      @auth
-          <!-- Attendee situation -->
-          @if(Auth::user()->user_type === 'Attendee')
-              @if($availableSpots > 0)
-                  <button class="btn btn-success w-100">Book Now</button>
-              @else
-                  <button class="btn btn-secondary w-100" disabled>已額滿</button>
-              @endif
+        <!-- Logic of Buttons  -->
+        @auth
+            <!-- Attendee situation -->
+            @if(Auth::user()->user_type === 'Attendee')
+                @if($availableSpots > 0)
+                    <button class="btn btn-success w-100">Book Now</button>
+                @else
+                    <button id="fully_booked" class="btn btn-secondary w-100">Fully Booked</button>
+            @endif
 
-          <!-- Organiser situation -->
-          @elseif(Auth::user()->user_type === 'Organiser' && Auth::id() === $event->organiser_id)
-              <button class="btn btn-warning w-100 mb-2">Edit</button>
-              <button class="btn btn-danger w-100">Delete</button>
-              <!-- TODO: Edit/Delete Action -->
-          @endif
-      @endauth
+            <!-- Organiser situation -->
+            @elseif(Auth::user()->user_type === 'Organiser' && Auth::id() === $event->organiser_id)
+                <button class="btn btn-warning w-100 mb-2">Edit</button>
+                <button class="btn btn-danger w-100">Delete</button>
+                <!-- TODO: Add Edit/Delete Action -->
+            @endif
+        @else
+            <!-- Guest situation -->
+            <a href="{{ route('login') }}" class="btn btn-info w-100">
+                Login to book now
+            </a>
+        @endauth
     </div>
   </div>
 </div>
+
+<x-recommended :recommended="$recommended" />
 @endsection
