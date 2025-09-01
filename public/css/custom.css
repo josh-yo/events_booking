@@ -54,6 +54,10 @@ tr>td{
     padding: 1rem 1rem!important;
 }
 
+.event_title{
+    font-size: 22px;
+}
+
 /* for recommended carousel */
 .carousel-control-custom {
     width: 8%;
