@@ -62,4 +62,25 @@ class EventController extends Controller
 
         return redirect()->route('dashboard')->with('success', "Event \"$event->title\" deleted successfully!");
     }
+
+    public function show($id)
+    {
+        $event = Event::with('organiser')->findOrFail($id);
+
+        // TODO: bookings haven't been integrated yet, using static data for now
+        $currentBookings = 3; // static demo
+        $availableSpots = $event->capacity - $currentBookings;
+
+        // random recommendations few events
+        $recommended = Event::where('id', '!=', $id)
+        ->inRandomOrder()
+        ->limit(6)
+        ->get();
+
+        return view('events.eventDetail', [
+            'event' => $event,
+            'availableSpots' => $availableSpots,
+            'recommended' => $recommended,
+        ]);
+    }
 }

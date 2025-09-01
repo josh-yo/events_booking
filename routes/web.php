@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function () {
     ->middleware('auth')
     ->name('dashboard');
 
+    Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
+
     Route::delete('/events/{id}', [EventController::class, 'destroy'])
     ->middleware('auth')
     ->name('events.destroy');
