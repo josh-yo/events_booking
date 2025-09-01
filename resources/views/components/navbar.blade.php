@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{{ route('events.index') }}">Home</a>
+                <a class="nav-link" aria-current="page" href="{{ route('events.index') }}">Home</a>
             </li>
             <!-- Show user-specific links -->
             @auth
@@ -34,7 +34,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
             @else
-                <div class="d-flex align-items-center">
+                <!-- <div class="d-flex align-items-center">
                     <span class="navbar-text text-light me-3">
                         {{ Auth::user()->name }}
                         <span class="badge bg-primary">{{ Auth::user()->user_type }}</span>
@@ -45,7 +45,21 @@
                             Logout
                         </button>
                     </form>
-                </div>
+                </div> -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item d-flex align-items-center">
+                        <span class="navbar-text text-light me-3">
+                            {{ Auth::user()->name }}
+                            <span class="badge bg-primary">{{ Auth::user()->user_type }}</span>
+                        </span>
+                        <form method="POST" action="{{ route('logout') }}" class="mb-0">
+                            @csrf
+                            <button type="submit" class="nav-link btn btn-link text-light p-0" style="text-decoration: none;">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
             @endguest
     </ul>
         </div>

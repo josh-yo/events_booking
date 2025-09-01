@@ -5,10 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrganiserController;
 
-// Public Routes
-Route::get('/', [EventController::class, 'index'])->name('events.index');
-Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -30,5 +26,10 @@ Route::middleware('auth')->group(function () {
     ->middleware('auth')
     ->name('events.destroy');
 });
+
+// Public Routes
+Route::get('/', [EventController::class, 'index'])->name('events.index');
+Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
+Route::view('/privacy', 'privacy')->name('privacy');
 
 require __DIR__.'/auth.php';

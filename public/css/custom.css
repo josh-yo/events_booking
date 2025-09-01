@@ -1,3 +1,53 @@
+@import url(https://fonts.googleapis.com/css?family=Gloria+Hallelujah&display=swap); /* font-family: 'Gloria Hallelujah', cursive; */
+@import url(https://fonts.googleapis.com/css?family=Balsamiq+Sans&display=swap); /* font-family: 'Balsamiq Sans', cursive; */
+
+body, .navbar, .navbar-brand, .nav-link {
+  margin: 0;
+  font-family: 'Balsamiq Sans', cursive,-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Gloria Hallelujah', sans-serif!important;
+  -webkit-font-smoothing: antialiased!important;
+  -moz-osx-font-smoothing: grayscale!important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace!important;
+}
+
+.privacy-policy-title{
+    border-bottom: 8px solid wheat;
+    border-radius: 40%;
+    display: inline-block;
+    font-family: Gloria Hallelujah, cursive;
+    font-size: 2rem;
+}
+
+.info-title{
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    font-family: Gloria Hallelujah, cursive;
+}
+
+.info-content{
+    line-height: 2;
+}
+
+.navbar .nav-link {
+    cursor: pointer !important;
+    display: block !important;
+    padding: 0.5rem 1rem !important;
+}
+
+.collapse:not(.show) {
+  display: none !important;
+}
+.collapse.show {
+  display: block !important;
+}
+
+
 .nav-link {
     color: #fff;
     text-decoration: none;
