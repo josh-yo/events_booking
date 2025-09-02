@@ -28,12 +28,15 @@ class BookingController extends Controller
             'event_id' => 'required|exists:events,id',
         ]);
 
-        Booking::create([
+        $booking = Booking::create([
             'event_id'    => $request->event_id,
             'user_id' => Auth::id(),
         ]);
 
-        return redirect()->route('myBookings')->with('success', 'Booking successful!');
+        $eventTitle = $booking->event->title;
+
+        return redirect()->route('myBookings')
+            ->with('success', '✅Your booking has been confirmed');
     }
 
     // Cancel a booking
@@ -41,11 +44,15 @@ class BookingController extends Controller
     {
         $booking = Booking::where('id', $id)
             ->where('user_id', Auth::id())
+            ->with('event')
             ->firstOrFail();
+
+        $eventTitle = $booking->event->title;
 
         $booking->delete();
 
-        return redirect()->route('myBookings')->with('success', 'Booking cancelled.');
+        return redirect()->route('myBookings')
+            ->with('success', '‼️ Your booking has been cancelled');
     }
 
 }
