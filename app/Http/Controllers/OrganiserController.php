@@ -12,17 +12,17 @@ class OrganiserController extends Controller
     public function dashboard()
     {
         $userId = Auth::id();
-       
-        $events = DB::table('events')
-        ->select('id', 'title', 'date_time', 'capacity')
-        ->where('organiser_id', $userId)
-        ->orderBy('date_time', 'asc')
-        ->paginate(8);
 
-        foreach ($events as $event) {
-            $event->bookings = 0;
-            $event->remaining = $event->capacity;
-        }
+        $events = DB::select("
+            SELECT e.id, e.title, e.date_time, e.capacity,
+                COUNT(b.id) AS bookings,
+                (e.capacity - COUNT(b.id)) AS remaining
+            FROM events e
+            LEFT JOIN bookings b ON e.id = b.event_id
+            WHERE e.organiser_id = ?
+            GROUP BY e.id, e.title, e.date_time, e.capacity
+            ORDER BY e.date_time ASC
+        ", [$userId]);
 
         return view('dashboard', compact('events'));
     }

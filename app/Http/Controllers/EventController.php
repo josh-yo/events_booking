@@ -67,8 +67,8 @@ class EventController extends Controller
     {
         $event = Event::with('organiser')->findOrFail($id);
 
-        // TODO: bookings haven't been integrated yet, using static data for now
-        $currentBookings = 3; // static demo
+        // get all bookings for this event and count them
+        $currentBookings = $event->bookings->count();
         $availableSpots = $event->capacity - $currentBookings;
 
         // random recommendations few events

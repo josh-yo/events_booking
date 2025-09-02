@@ -24,4 +24,16 @@ class Event extends Model
     {
         return $this->belongsTo(User::class, 'organiser_id');
     }
+
+    // relation: each event can have many bookings
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'event_id');
+    }
+
+    public function available_spots()
+    {
+        return $this->capacity - $this->bookings->count();
+    }
+
 }

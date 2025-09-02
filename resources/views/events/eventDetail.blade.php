@@ -32,7 +32,7 @@
         <li><strong>Time:</strong> {{ \Carbon\Carbon::parse($event->date_time)->format('g:i A') }}</li>
         <li><strong>Location:</strong> {{ $event->location }}</li>
         <li><strong>Capacity:</strong> {{ $event->capacity }}</li>
-        <li><strong>Available Spots:</strong> {{ $availableSpots }}</li>
+        <li><strong>Remaining Spots:</strong> {{ $availableSpots }}</li>
         <li><strong>Organiser:</strong> {{ $event->organiser->name }}</li>
       </ul>
 
