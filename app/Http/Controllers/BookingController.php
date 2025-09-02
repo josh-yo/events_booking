@@ -16,6 +16,9 @@ class BookingController extends Controller
 
         $bookings = Booking::with('event')
         ->where('user_id', $userId)
+        ->join('events', 'bookings.event_id', '=', 'events.id') // Join with events table
+        ->orderBy('events.date_time', 'asc') // Order by event date and time
+        ->select('bookings.*') // only select booking fields
         ->get();
 
         return view('myBookings', compact('bookings'));
@@ -36,7 +39,8 @@ class BookingController extends Controller
         $eventTitle = $booking->event->title;
 
         return redirect()->route('myBookings')
-            ->with('success', '✅Your booking has been confirmed');
+            ->with('success', '✅Your booking has been confirmed')
+            ->with('highlight_booking_id', $booking->id);
     }
 
     // Cancel a booking

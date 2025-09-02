@@ -108,6 +108,22 @@ tr>td{
     font-size: 22px;
 }
 
+.hover_title:hover{
+    text-decoration: underline!important;
+    text-underline-offset: 5px!important;
+    color: #96031A!important;
+}
+
+.highlight_row{
+    background-color: #FF9B71;
+    animation: fadeBg 4.5s ease-out forwards;
+}
+
+@keyframes fadeBg {
+    0%   { background-color: #FF9B71; }
+    100% { background-color: transparent; }
+}
+
 /* for recommended carousel */
 .carousel-control-custom {
     width: 8%;
