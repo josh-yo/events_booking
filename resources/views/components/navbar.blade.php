@@ -34,18 +34,6 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
             @else
-                <!-- <div class="d-flex align-items-center">
-                    <span class="navbar-text text-light me-3">
-                        {{ Auth::user()->name }}
-                        <span class="badge bg-primary">{{ Auth::user()->user_type }}</span>
-                    </span>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-link nav-link" style="display:inline; cursor:pointer;">
-                            Logout
-                        </button>
-                    </form>
-                </div> -->
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item d-flex align-items-center">
                         <span class="navbar-text text-light me-3">
