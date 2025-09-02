@@ -23,7 +23,7 @@
 
                 @if(Auth::user()->user_type === 'Attendee')
                     <li class="nav-item">
-                        <a class="nav-link" href="#">My Bookings</a>
+                        <a class="nav-link" href="{{ route('myBookings') }}">My Bookings</a>
                     </li>
                 @endif
             @endauth

@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrganiserController;
+use App\Http\Controllers\BookingController;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -25,6 +26,12 @@ Route::middleware(['auth', 'auth_organiser'])->group(function () {
     Route::delete('/events/{id}', [EventController::class, 'destroy'])
     ->middleware('auth')
     ->name('events.destroy');
+});
+
+// Attendee Routes
+Route::middleware(['auth', 'auth_attendee'])->group(function () {
+    Route::get('/myBookings', [BookingController::class, 'myBookings'])
+        ->name('myBookings');
 });
 
 // Public Routes
