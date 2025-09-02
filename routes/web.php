@@ -32,6 +32,12 @@ Route::middleware(['auth', 'auth_organiser'])->group(function () {
 Route::middleware(['auth', 'auth_attendee'])->group(function () {
     Route::get('/myBookings', [BookingController::class, 'myBookings'])
         ->name('myBookings');
+
+    Route::post('/bookings', [BookingController::class, 'store'])
+        ->name('bookings.store');
+
+    Route::delete('/bookings/{id}/cancel', [BookingController::class, 'cancel'])
+        ->name('bookings.cancel');
 });
 
 // Public Routes

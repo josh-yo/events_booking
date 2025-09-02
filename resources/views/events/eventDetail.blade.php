@@ -41,7 +41,14 @@
             <!-- Attendee situation -->
             @if(Auth::user()->user_type === 'Attendee')
                 @if($availableSpots > 0)
-                    <button class="btn btn-success w-100">Book Now</button>
+                    <!-- <button class="btn btn-success w-100">Book Now</button> -->
+                     <form action="{{ route('bookings.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="event_id" value="{{ $event->id }}">
+                        <button type="submit" class="btn btn-success w-100">
+                            Book Now
+                        </button>
+                    </form>
                 @else
                     <button id="fully_booked" class="btn btn-secondary w-100">Fully Booked</button>
             @endif
