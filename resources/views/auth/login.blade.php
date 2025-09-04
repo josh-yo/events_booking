@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark p-3" style="background-color: #343a40!important;">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('events.index') }}" style="'Balsamiq Sans', cursive,-apple-system, BlinkMacSystemFont">Events Booking</a>
         <div class="navbar-collapse show">

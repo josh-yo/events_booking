@@ -1,4 +1,4 @@
-@extends('layouts.app', ['containerClass' => 'container-fluid mt-4'])
+@extends('layouts.app', ['containerClass' => 'container-fluid mt-4 mb-5'])
 
 @section('content')
     <h3>Event List</h3>

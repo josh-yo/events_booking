@@ -137,6 +137,26 @@ tr>td{
     transform: scale(1.1);
 }
 
+.navbar{
+    background-color: #343a40!important;
+}
+
+/* push footer down */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main {
+    flex: 1; 
+}
+
 /* for recommended carousel */
 .carousel-control-custom {
     width: 8%;
