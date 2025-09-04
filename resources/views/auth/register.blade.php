@@ -57,7 +57,11 @@
                 <a href="{{ route('privacy') }}" target="_blank" class="text-decoration-underline text-primary text-blue-500 underline">
                     Privacy Policy
                 </a> 
-                and Terms of Use
+                and 
+                <a href="{{ route('terms_of_use') }}" target="_blank" class="text-decoration-underline text-primary text-blue-500 underline">
+                    Terms of Use
+                </a> 
+                
             </label>
             @error('terms')
                 <div class="text-danger small mt-1">{{ $message }}</div>

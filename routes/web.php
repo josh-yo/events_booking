@@ -44,5 +44,6 @@ Route::middleware(['auth', 'auth_attendee'])->group(function () {
 Route::get('/', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
 Route::view('/privacy', 'privacy')->name('privacy');
+Route::view('/terms_of_use', 'termsOfUse')->name('terms_of_use');
 
 require __DIR__.'/auth.php';
