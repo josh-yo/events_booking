@@ -26,7 +26,7 @@
             </thead>
             <tbody>
                 @foreach ($events as $event)
-                    <tr>
+                    <tr @if(session('highlight_event_id') == $event->id) class="highlight_row" @endif>
                         <td>{{ $event->title }}</td>
                         <td>{{ \Carbon\Carbon::parse($event->date_time)->format('d/M/Y') }}</td>
                         <td>{{ \Carbon\Carbon::parse($event->date_time)->format('g:i A') }}</td>
@@ -62,7 +62,7 @@
     <!-- Mobile Version -->
     <div class="d-block d-md-none">
         @foreach ($events as $event)
-            <div class="card mb-3 shadow-sm">
+            <div class="card mb-3 shadow-sm @if(session('highlight_event_id') == $event->id) highlight_row @endif">
                 <div class="card-body">
                     <h5 class="card-title">{{ $event->title }}</h5>
                     <p class="card-text">
@@ -92,4 +92,5 @@
 
 @include('components.toast')
 @include('components.delete_modal')
+@include('components.alert')
 @endsection

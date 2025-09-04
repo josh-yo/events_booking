@@ -58,9 +58,22 @@ class EventController extends Controller
             return redirect()->route('dashboard')->with('error', 'Event not found or unauthorized.');
         }
 
+        // if there are any bookings, prevent deletion
+        $bookingCount = DB::table('bookings')
+            ->where('event_id', $id)
+            ->count();
+
+        if ($bookingCount > 0) {
+            return back()
+            ->with('error', '⚠️ This event already has attendees and cannot be deleted.')
+            ->with('highlight_event_id', $id);
+        }
+
         DB::table('events')->where('id', $id)->delete();
 
-        return redirect()->route('dashboard')->with('success', "Event \"$event->title\" deleted successfully!");
+        return redirect()
+            ->route('dashboard')
+            ->with('success', "Event \"$event->title\" deleted successfully!");
     }
 
     public function show($id)

@@ -58,8 +58,24 @@
             <!-- Organiser situation -->
             @elseif(Auth::user()->user_type === 'Organiser' && Auth::id() === $event->organiser_id)
                 <button class="btn btn-warning w-100 mb-2">Edit</button>
-                <button class="btn btn-danger w-100">Delete</button>
-                <!-- TODO: Add Edit/Delete Action -->
+                <!-- <button class="btn btn-danger w-100">Delete</button> -->
+                <form id="delete-form-{{ $event->id }}" 
+                      action="{{ url('/events/'.$event->id) }}" 
+                      method="POST" 
+                      class="">
+                    @csrf
+                    @method('DELETE')
+                    <!-- Delete Button (open modal) -->
+                    <button 
+                        type="button" 
+                        class="btn btn-danger w-100"
+                        data-bs-toggle="modal" 
+                        data-bs-target="#deleteModal"
+                        data-id="{{ $event->id }}"
+                        data-title="{{ $event->title }}">
+                        Delete
+                    </button>
+                </form>
             @endif
         @else
             <!-- Guest situation -->
@@ -72,4 +88,7 @@
 </div>
 
 <x-recommended :recommended="$recommended" />
+
+@include('components.delete_modal')
+@include('components.alert')
 @endsection

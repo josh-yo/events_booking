@@ -52,11 +52,10 @@
         </div>
     </div>
     
-
     <!-- Mobile Version -->
     <div class="d-block d-md-none">
         @forelse ($bookings as $booking)
-            <div class="card mb-3 shadow-sm">
+            <div class="card mb-3 shadow-sm @if(session('highlight_booking_id') == $booking->id) highlight_row @endif">
                 <div class="card-body">
                         <h5 class="card-title">
                             <a href="{{ route('events.show', $booking->event->id) }}" class="text-decoration-none text-dark hover_title">{{ $booking->event->title }}</a>
