@@ -10,13 +10,15 @@
               @foreach($chunk as $rec)
                 <div class="col-12 col-md-6 mb-4">
                   <div class="card h-100 shadow-sm mx-2">
-                    <a href="{{ route('events.show', $rec->id) }}">
-                    <img src="{{ $rec->image_path }}"
-                         onerror="this.onerror=null;this.src='{{ asset('images/default.jpg') }}';"
-                         class="card-img-top"
-                         style="height:220px; object-fit:cover;"
-                         alt="{{ $rec->title }}">
-                    </a>
+                    <div class="img_container">
+                      <a href="{{ route('events.show', $rec->id) }}">
+                        <img src="{{ $rec->image_path }}"
+                            onerror="this.onerror=null;this.src='{{ asset('images/default.jpg') }}';"
+                            class="card-img-top img_hover"
+                            style="height:220px; object-fit:cover;"
+                            alt="{{ $rec->title }}">
+                      </a>
+                    </div>
                     <div class="card-body text-center">
                       
                       <h3 class="card-title fw-bold event_title">

@@ -125,6 +125,18 @@ tr>td{
     100% { background-color: transparent; }
 }
 
+.img_container{
+    overflow:hidden;
+}
+.img_hover{
+    display: block;
+    width: 100%;
+    transition: all 0.7s ease-out;
+}
+.img_hover:hover{
+    transform: scale(1.1);
+}
+
 /* for recommended carousel */
 .carousel-control-custom {
     width: 8%;

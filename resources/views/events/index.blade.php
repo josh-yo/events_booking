@@ -6,13 +6,15 @@
         @foreach($events as $event)
             <div class="col-md-3 mb-3">
                 <div class="card h-100 shadow-sm">
-                    <a href="{{ route('events.show', $event->id) }}">
-                        <img src="{{ $event->image_path }}" 
-                            onerror="this.onerror=null;this.src='{{ asset('images/default.jpg') }}';" 
-                            class="card-img-top" 
-                            style="height:200px;object-fit:cover;" 
-                            alt="{{ $event->title }}">
-                    </a>
+                    <div class="img_container">
+                        <a href="{{ route('events.show', $event->id) }}">
+                            <img src="{{ $event->image_path }}" 
+                                onerror="this.onerror=null;this.src='{{ asset('images/default.jpg') }}';" 
+                                class="card-img-top img_hover" 
+                                style="height:200px;object-fit:cover;" 
+                                alt="{{ $event->title }}">
+                        </a>
+                    </div>
 
                     <div class="card-body">
                         <h3 class="card-title event_title">
