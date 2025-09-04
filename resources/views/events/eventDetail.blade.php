@@ -40,17 +40,19 @@
         @auth
             <!-- Attendee situation -->
             @if(Auth::user()->user_type === 'Attendee')
-                @if($availableSpots > 0)
-                    <!-- <button class="btn btn-success w-100">Book Now</button> -->
-                     <form action="{{ route('bookings.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="event_id" value="{{ $event->id }}">
-                        <button type="submit" class="btn btn-success w-100">
-                            Book Now
-                        </button>
-                    </form>
+                <!-- Situation 1： Full booked -->
+                @if($availableSpots <= 0)
+                  <button id="booked_fully" class="btn btn-secondary w-100 no_booked" disabled>Fully Booked</button>
+                <!-- Situation 2：Already Booked -->
+                @elseif($alreadyBooked)
+                  <button id="booked_exist" class="btn btn-primary w-100 no_booked" disabled>Already Booked</button>
+                <!-- Situation 3：Can Book -->
                 @else
-                    <button id="fully_booked" class="btn btn-secondary w-100">Fully Booked</button>
+                  <form action="{{ route('bookings.store') }}" method="POST">
+                      @csrf
+                      <input type="hidden" name="event_id" value="{{ $event->id }}">
+                      <button type="submit" class="btn btn-success w-100">Book Now</button>
+                  </form>
             @endif
 
             <!-- Organiser situation -->

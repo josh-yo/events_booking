@@ -71,6 +71,14 @@ class EventController extends Controller
         $currentBookings = $event->bookings->count();
         $availableSpots = $event->capacity - $currentBookings;
 
+        // Check if the user has already booked this event
+        $alreadyBooked = false;
+        if (auth()->check()) {
+            $alreadyBooked = $event->bookings()
+                ->where('user_id', auth()->id())
+                ->exists();
+        }
+
         // random recommendations few events
         $recommended = Event::where('id', '!=', $id)
         ->inRandomOrder()
@@ -80,6 +88,7 @@ class EventController extends Controller
         return view('events.eventDetail', [
             'event' => $event,
             'availableSpots' => $availableSpots,
+            'alreadyBooked' => $alreadyBooked,
             'recommended' => $recommended,
         ]);
     }

@@ -79,8 +79,9 @@ code {
     text-underline-offset: 10px;
 }
 
-#fully_booked{
+#booked_fully, #booked_exist{
     cursor: not-allowed !important;
+    pointer-events: auto;
 }
 
 .date_time{
