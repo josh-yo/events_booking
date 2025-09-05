@@ -65,7 +65,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="capacity" class="form-label"><span class="text-danger">*</span>Capacity (between 1 and 100)</label>
+            <label for="capacity" class="form-label"><span class="text-danger">*</span>Capacity (between 1 and 1000)</label>
             <input type="number"
                 class="form-control @error('capacity') is-invalid @enderror"
                 id="capacity"

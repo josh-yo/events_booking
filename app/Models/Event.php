@@ -17,6 +17,7 @@ class Event extends Model
         'capacity',
         'organiser_id',
         'image_path',
+        'tags',
     ];
 
     // relation: each event belongs to an organiser

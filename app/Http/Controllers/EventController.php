@@ -44,17 +44,48 @@ class EventController extends Controller
 
         return redirect()->route('dashboard')
                         ->with('title', $event->title)
+                        ->with('highlight_event_id', $event->id)
                         ->with('success', "created successfully!");
     }
 
+    // show edit page
     public function edit($id)
     {
-        // later add "check if the organiser is the one who created the event"
         $event = Event::findOrFail($id);
+
+        // only the owner can enter edit page (front end side)
+        if ($event->organiser_id !== Auth::id()) {
+            return redirect()->route('dashboard')
+                ->with('error', '⚠️ You are only allowed to edit events you have created below!');
+        }
 
         return view('events.edit', [
             'event' => $event
         ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'title'       => 'required|max:100',
+            'description' => 'nullable',
+            'date_time'   => 'required|date|after:now',
+            'location'    => 'required|max:255',
+            'capacity'    => 'required|integer|min:1|max:1000',
+            'image_path'  => 'nullable|url',
+            'tags'        => 'required|in:indoor,outdoor',
+        ]);
+
+        $event = Event::where('id', $id)
+            // only the owner can update (back end side)
+            ->where('organiser_id', Auth::id())
+            ->firstOrFail();
+
+        $event->update($validated);
+
+        return redirect()->route('dashboard')
+            ->with('success', "\"{$event->title}\" updated successfully!")
+            ->with('highlight_event_id', $event->id);
     }
 
     public function destroy($id)
@@ -83,7 +114,7 @@ class EventController extends Controller
 
         return redirect()
             ->route('dashboard')
-            ->with('success', "Event \"$event->title\" deleted successfully!");
+            ->with('success', "\"$event->title\" deleted successfully!");
     }
 
     public function show($id)
