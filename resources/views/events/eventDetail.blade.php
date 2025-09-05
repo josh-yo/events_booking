@@ -57,7 +57,9 @@
 
             <!-- Organiser situation -->
             @elseif(Auth::user()->user_type === 'Organiser' && Auth::id() === $event->organiser_id)
-                <button class="btn btn-warning w-100 mb-2">Edit</button>
+                <a href="{{ route('events.edit', $event->id) }}" class="btn btn-warning w-100 mb-2">
+                  Edit
+                </a>
                 <!-- <button class="btn btn-danger w-100">Delete</button> -->
                 <form id="delete-form-{{ $event->id }}" 
                       action="{{ url('/events/'.$event->id) }}" 

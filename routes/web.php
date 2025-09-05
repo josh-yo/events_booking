@@ -26,6 +26,16 @@ Route::middleware(['auth', 'auth_organiser'])->group(function () {
     Route::delete('/events/{id}', [EventController::class, 'destroy'])
     ->middleware('auth')
     ->name('events.destroy');
+
+    // Edit
+    Route::get('/events/{id}/edit', [EventController::class, 'edit'])
+        ->name('events.edit')
+        ->middleware('auth');
+
+    // Update event
+    Route::put('/events/{id}', [EventController::class, 'update'])
+        ->name('events.update')
+        ->middleware('auth');
 });
 
 // Attendee Routes

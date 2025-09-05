@@ -47,6 +47,16 @@ class EventController extends Controller
                         ->with('success', "created successfully!");
     }
 
+    public function edit($id)
+    {
+        // later add "check if the organiser is the one who created the event"
+        $event = Event::findOrFail($id);
+
+        return view('events.edit', [
+            'event' => $event
+        ]);
+    }
+
     public function destroy($id)
     {
         $event = DB::table('events')

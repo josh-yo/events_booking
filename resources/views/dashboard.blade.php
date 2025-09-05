@@ -27,14 +27,18 @@
             <tbody>
                 @foreach ($events as $event)
                     <tr @if(session('highlight_event_id') == $event->id) class="highlight_row" @endif>
-                        <td>{{ $event->title }}</td>
+                         <td>
+                            <a href="{{ route('events.show', $event->id) }}" class="text-decoration-none text-dark hover_title">
+                                {{ $event->title }}
+                            </a>
+                        </td>
                         <td>{{ \Carbon\Carbon::parse($event->date_time)->format('d/M/Y') }}</td>
                         <td>{{ \Carbon\Carbon::parse($event->date_time)->format('g:i A') }}</td>
                         <td>{{ $event->capacity }}</td>
                         <td>{{ $event->bookings }}</td>
                         <td>{{ $event->remaining }}</td>
                         <td>
-                            <a href="{{ url('/events/'.$event->id.'/edit') }}" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="{{ route('events.edit', $event->id) }}" class="btn btn-primary btn-sm">Edit</a>
                             <form id="delete-form-{{ $event->id }}" 
                                 action="{{ url('/events/'.$event->id) }}" 
                                 method="POST" 
@@ -64,7 +68,11 @@
         @foreach ($events as $event)
             <div class="card mb-3 shadow-sm @if(session('highlight_event_id') == $event->id) highlight_row @endif">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $event->title }}</h5>
+                    <h5 class="card-title">
+                        <a href="{{ route('events.show', $event->id) }}" class="text-decoration-none text-dark hover_title">
+                            {{ $event->title }}
+                        </a>
+                    </h5>
                     <p class="card-text">
                         <ul class="list-unstyled mb-0">
                             <li><strong>Event Date:</strong> {{ \Carbon\Carbon::parse($event->date_time)->format('d/M/Y') }}</li>
@@ -74,7 +82,7 @@
                             <li><strong>Remaining:</strong> {{ $event->remaining }}</li>
                         </ul>
                     </p>
-                    <a href="{{ url('/events/'.$event->id.'/edit') }}" class="btn btn-sm btn-primary">Edit</a>
+                    <a href="{{ route('events.edit', $event->id) }}" class="btn btn-sm btn-primary">Edit</a>
                     <!-- Delete Button (only open modal) -->
                     <button 
                         type="button" 
