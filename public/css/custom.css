@@ -141,6 +141,56 @@ tr>td{
     background-color: #343a40!important;
 }
 
+.filter-title {
+    font-weight: bold;
+    padding: 10px 13px;
+    letter-spacing: 1px;
+}
+
+.filter{
+    border: 2px solid gray;
+    border-radius: 8px;
+    box-shadow: 6px 0 12px #0003;
+    padding: 10px;
+}
+
+.list-group>li{
+    border: none;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Highlight category when click */
+.list-group-item.active-category {
+    background-color: #e63946;
+    color: #fff!important;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+/* Badge amount */
+.list-group-item.active-category .item-amount {
+    background-color: #fff;
+    color: #e63946;
+}
+
+.list-group-item:not(.active-category):hover .item-amount,
+.list-group-item:not(.active-category):hover span {
+    color: rgba(230, 57, 70, 0.9);
+}
+
+.list-group-item:last-child {
+    border-bottom: none; /* Delete the last border line */
+}
+
+.item-amount{
+    font-size: 0.9rem!important;
+    color: #000!important;
+}
+
 /* push footer down */
 html, body {
     height: 100%;

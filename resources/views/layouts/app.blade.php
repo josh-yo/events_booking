@@ -13,7 +13,7 @@
 <body>
     <x-navbar />
 
-    <div class="{{ $containerClass ?? 'container mt-4' }} main">
+    <div class="{{ $containerClass ?? 'container mt-4 mb-3' }} main">
         @yield('content')
     </div>
 
