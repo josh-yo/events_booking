@@ -68,7 +68,7 @@ class EventController extends Controller
     }
 
     // show edit page
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $event = Event::findOrFail($id);
 
@@ -136,11 +136,14 @@ class EventController extends Controller
             ->count();
 
         if ($bookingCount > 0) {
+            $message = '⚠️ This event already has attendees and cannot be deleted.';
+            
             return back()
-            ->withErrors([
-                'event' => '⚠️ This event already has attendees and cannot be deleted.'
-            ])
-            ->with('highlight_event_id', $id);
+                ->withErrors([
+                    'event' => $message
+                ])
+                ->with('error', $message)
+                ->with('highlight_event_id', $id);
         }
 
         DB::table('events')->where('id', $id)->delete();
