@@ -74,6 +74,10 @@ class EventController extends Controller
 
         // only the owner can enter edit page (front end side)
         if ($event->organiser_id !== Auth::id()) {
+            if ($request->expectsJson()) {
+                abort(403, 'You are not allowed to edit this event.');
+            }
+
             return redirect()->route('dashboard')
                 ->with('error', '⚠️ You are only allowed to edit events you have created below!');
         }
@@ -101,7 +105,11 @@ class EventController extends Controller
         $event = Event::where('id', $id)
             // only the owner can update (back end side)
             ->where('organiser_id', Auth::id())
-            ->firstOrFail();
+            ->first();
+
+        if (!$event) {
+            abort(403, 'You are not allowed to update this event.');
+        }
 
         $event->update($validated);
         $event->categories()->sync($request->categories);
@@ -129,7 +137,9 @@ class EventController extends Controller
 
         if ($bookingCount > 0) {
             return back()
-            ->with('error', '⚠️ This event already has attendees and cannot be deleted.')
+            ->withErrors([
+                'event' => '⚠️ This event already has attendees and cannot be deleted.'
+            ])
             ->with('highlight_event_id', $id);
         }
 
