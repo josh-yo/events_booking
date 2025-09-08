@@ -10,16 +10,15 @@
                 <ul class="list-group">
                     <li class="list-group-item filter-item" data-tag="all">
                         <span>All</span>
-                        <span class="badge float-end item-amount">( 24 )</span>
+                        <span class="badge float-end item-amount">( {{ $totalEvents }} )</span>
                     </li>
-                    <li class="list-group-item filter-item" data-tag="indoor">
-                        <span>Indoor</span>
-                        <span class="badge float-end item-amount">( 10 )</span>
-                    </li>
-                    <li class="list-group-item filter-item" data-tag="outdoor">
-                        <span>Outdoor</span>
-                        <span class="badge float-end item-amount">( 14 )</span>
-                    </li>
+                    <!-- Categories -->
+                    @foreach($categories as $category)
+                        <li class="list-group-item filter-item" data-tag="{{ $category->id }}">
+                            <span>{{ $category->name }}</span>
+                            <span class="badge float-end item-amount">( {{ $category->events_count }} )</span>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </div>

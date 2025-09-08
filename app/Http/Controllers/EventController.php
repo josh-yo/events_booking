@@ -15,7 +15,9 @@ class EventController extends Controller
     {
         // 8 events per page
         $events = Event::orderBy('date_time', 'asc')->paginate(8); 
-        return view('events.index', compact('events'));
+        $categories = Category::withCount('events')->get();
+        $totalEvents = Event::count();
+        return view('events.index', compact('events', 'categories', 'totalEvents'));
     }
 
     // Show the form for creating a new event
