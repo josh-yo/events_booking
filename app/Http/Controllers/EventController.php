@@ -20,6 +20,19 @@ class EventController extends Controller
         return view('events.index', compact('events', 'categories', 'totalEvents'));
     }
 
+    public function filter($categoryId)
+    {
+        if ($categoryId === "all") {
+            $events = Event::orderBy('date_time', 'asc')->paginate(8);
+        } else {
+            $events = Event::whereHas('categories', function($q) use ($categoryId) {
+                $q->where('categories.id', $categoryId);
+            })->orderBy('date_time', 'asc')->paginate(8);
+        }
+
+        return view('events.partials.event_list', compact('events'));
+    }
+
     // Show the form for creating a new event
     public function create()
     {

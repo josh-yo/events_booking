@@ -53,6 +53,7 @@ Route::middleware(['auth', 'auth_attendee'])->group(function () {
 // Public Routes
 Route::get('/', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/{id}', [EventController::class, 'show'])->name('events.show');
+Route::get('/events/filter/{category}', [EventController::class, 'filter'])->name('events.filter');
 Route::view('/privacy', 'privacy')->name('privacy');
 Route::view('/terms_of_use', 'termsOfUse')->name('terms_of_use');
 
