@@ -23,9 +23,24 @@ class RegistrationTest extends TestCase
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
+            'terms' => true, // Assuming there is a terms agreement checkbox
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
+        $response->assertRedirect(route('events.index'));
+    }
+
+    public function test_user_cannot_register_without_agreeing_to_privacy_policy(): void
+    {
+        $response = $this->post('/register', [
+            'name' => 'Test User',
+            'email' => 'test2@example.com',
+            'password' => 'password',
+            'password_confirmation' => 'password',
+            // No agree_terms
+        ]);
+
+        $this->assertGuest(); // Assert user is not authenticated
+        $response->assertSessionHasErrors(['terms']); // Assert error is present
     }
 }
