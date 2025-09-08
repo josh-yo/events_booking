@@ -17,7 +17,6 @@ class Event extends Model
         'capacity',
         'organiser_id',
         'image_path',
-        'tags',
     ];
 
     // relation: each event belongs to an organiser
@@ -35,6 +34,12 @@ class Event extends Model
     public function available_spots()
     {
         return $this->capacity - $this->bookings->count();
+    }
+
+    // relation: each event can belong to many categories
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 
 }

@@ -90,15 +90,25 @@
             @enderror
         </div>
 
+        <!-- Categories -->
         <div class="mb-3">
-            <label for="tags" class="form-label"><span class="text-danger">*</span>Tags</label>
-            <select class="form-select @error('tags') is-invalid @enderror"
-                    id="tags" name="tags">
-                <option value="">-- Select a Tag --</option>
-                <option value="indoor" {{ old('tags') == 'indoor' ? 'selected' : '' }}>Indoor</option>
-                <option value="outdoor" {{ old('tags') == 'outdoor' ? 'selected' : '' }}>Outdoor</option>
-            </select>
-            @error('tags')
+            <label class="form-label"><span class="text-danger">*</span>Categories</label>
+            <div class="d-flex flex-wrap gap-3">
+                @foreach($categories as $category)
+                    <div class="form-check">
+                        <input class="form-check-input"
+                            type="checkbox"
+                            id="category_{{ $category->id }}"
+                            name="categories[]"
+                            value="{{ $category->id }}"
+                            {{ in_array($category->id, old('categories', [])) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="category_{{ $category->id }}">
+                            {{ $category->name }}
+                        </label>
+                    </div>
+                @endforeach
+            </div>
+            @error('categories')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>

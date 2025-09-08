@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Category;
 
 class EventController extends Controller
 {
@@ -20,7 +21,8 @@ class EventController extends Controller
     // Show the form for creating a new event
     public function create()
     {
-        return view('events.createEvent');
+       $categories = Category::all();
+        return view('events.createEvent', compact('categories'));
     }
 
     // Store a newly created event in storage
@@ -33,7 +35,8 @@ class EventController extends Controller
             'location'    => 'required|max:255',
             'capacity'    => 'required|integer|min:1|max:1000',
             'image_path'  => 'nullable|url', // New validation rule for image URL
-            'tags' => 'required|in:indoor,outdoor',
+            'categories'   => 'required|array', // at least one category
+            'categories.*' => 'exists:categories,id', // each category must exist in categories table
         ]);
 
         // Add the currently logged-in Organiser ID
@@ -41,6 +44,7 @@ class EventController extends Controller
 
         // Create the new event
         $event = Event::create($validated);
+        $event->categories()->sync($request->categories);
 
         return redirect()->route('dashboard')
                         ->with('title', $event->title)
@@ -59,8 +63,10 @@ class EventController extends Controller
                 ->with('error', '⚠️ You are only allowed to edit events you have created below!');
         }
 
+        $categories = Category::all();
         return view('events.edit', [
-            'event' => $event
+            'event' => $event,
+            'categories' => $categories
         ]);
     }
 
@@ -73,7 +79,8 @@ class EventController extends Controller
             'location'    => 'required|max:255',
             'capacity'    => 'required|integer|min:1|max:1000',
             'image_path'  => 'nullable|url',
-            'tags'        => 'required|in:indoor,outdoor',
+            'categories'   => 'required|array',
+            'categories.*' => 'exists:categories,id',
         ]);
 
         $event = Event::where('id', $id)
@@ -82,6 +89,7 @@ class EventController extends Controller
             ->firstOrFail();
 
         $event->update($validated);
+        $event->categories()->sync($request->categories);
 
         return redirect()->route('dashboard')
             ->with('success', "\"{$event->title}\" updated successfully!")
