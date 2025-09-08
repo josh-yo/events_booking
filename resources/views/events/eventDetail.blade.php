@@ -34,6 +34,14 @@
         <li><strong>Capacity:</strong> {{ $event->capacity }}</li>
         <li><strong>Remaining Spots:</strong> {{ $availableSpots }}</li>
         <li><strong>Organiser:</strong> {{ $event->organiser->name }}</li>
+        <li>
+          <strong>Categories:</strong>
+          @forelse($event->categories as $category)
+              <span class="badge bg-primary me-1 category_text">{{ $category->name }}</span>
+          @empty
+              <span class="text-muted">No categories</span>
+          @endforelse
+        </li>
       </ul>
 
         <!-- Logic of Buttons  -->

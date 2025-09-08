@@ -137,6 +137,10 @@ tr>td{
     transform: scale(1.1);
 }
 
+.category_text{
+    font-size: 14px!important;
+}
+
 .navbar{
     background-color: #343a40!important;
 }
