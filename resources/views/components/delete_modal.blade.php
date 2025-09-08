@@ -1,5 +1,5 @@
 @auth
-    @if(Auth::user()->user_type === 'organiser')
+    @if(Auth::user()->user_type === 'Organiser')
     <!-- Shared Delete Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
       <div class="modal-dialog">

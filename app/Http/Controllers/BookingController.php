@@ -31,6 +31,27 @@ class BookingController extends Controller
             'event_id' => 'required|exists:events,id',
         ]);
 
+        $event = \App\Models\Event::find($request->event_id);
+
+        // Check if the user has already booked this event
+        $alreadyBooked = Booking::where('event_id', $request->event_id)
+            ->where('user_id', Auth::id())
+            ->exists();
+
+        if ($alreadyBooked) {
+            return redirect()->back()->withErrors([
+                'event_id' => 'You have already booked this event.',
+            ]);
+        }
+
+        // Check if the event is full
+        $currentBookings = $event->bookings()->count();
+        if ($currentBookings >= $event->capacity) {
+            return redirect()->back()->withErrors([
+                'event_id' => 'This event is already full.',
+            ]);
+        }
+
         $booking = Booking::create([
             'event_id'    => $request->event_id,
             'user_id' => Auth::id(),
