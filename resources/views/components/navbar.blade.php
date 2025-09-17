@@ -38,7 +38,7 @@
                     <li class="nav-item d-flex align-items-center">
                         <span class="navbar-text text-light me-3">
                             {{ Auth::user()->name }}
-                            <span class="badge bg-primary">{{ Auth::user()->user_type }}</span>
+                            <span class="badge bg-primary user_type">{{ Auth::user()->user_type }}</span>
                         </span>
                         <form method="POST" action="{{ route('logout') }}" class="mb-0">
                             @csrf

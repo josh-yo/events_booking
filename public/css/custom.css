@@ -125,6 +125,10 @@ tr>td{
     100% { background-color: transparent; }
 }
 
+.user_type{
+    font-size: 16px!important;
+}
+
 .img_container{
     overflow:hidden;
 }

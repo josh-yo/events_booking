@@ -36,5 +36,59 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'user_type' => 'Attendee',
         ]);
+        User::create([
+            'name' => '	Doctor Strange',
+            'email' => 'attendee02@test.com',
+            'password' => Hash::make('password'),
+            'user_type' => 'Attendee',
+        ]);
+        User::create([
+            'name' => 'Invisible Woman',
+            'email' => 'attendee03@test.com',
+            'password' => Hash::make('password'),
+            'user_type' => 'Attendee',
+        ]);
+        User::create([
+            'name' => 'Iron Man',
+            'email' => 'attendee04@test.com',
+            'password' => Hash::make('password'),
+            'user_type' => 'Attendee',
+        ]);
+        User::create([
+            'name' => 'Mister Fantastic',
+            'email' => 'attendee05@test.com',
+            'password' => Hash::make('password'),
+            'user_type' => 'Attendee',
+        ]);
+        User::create([
+            'name' => 'Deadpool',
+            'email' => 'attendee06@test.com',
+            'password' => Hash::make('password'),
+            'user_type' => 'Attendee',
+        ]);
+        User::create([
+            'name' => 'Psylocke',
+            'email' => 'attendee07@test.com',
+            'password' => Hash::make('password'),
+            'user_type' => 'Attendee',
+        ]);
+        User::create([
+            'name' => 'Moon Knight',
+            'email' => 'attendee08@test.com',
+            'password' => Hash::make('password'),
+            'user_type' => 'Attendee',
+        ]);
+        User::create([
+            'name' => 'Scarlet Witch',
+            'email' => 'attendee09@test.com',
+            'password' => Hash::make('password'),
+            'user_type' => 'Attendee',
+        ]);
+        User::create([
+            'name' => 'Captain America',
+            'email' => 'attendee10@test.com',
+            'password' => Hash::make('password'),
+            'user_type' => 'Attendee',
+        ]);
     }
 }
