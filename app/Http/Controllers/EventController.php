@@ -11,12 +11,17 @@ use App\Models\Category;
 
 class EventController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // 8 events per page
         $events = Event::orderBy('date_time', 'asc')->paginate(8); 
         $categories = Category::withCount('events')->get();
         $totalEvents = Event::count();
+
+        if ($request->ajax()) {
+            return view('events.partials.event_list', compact('events'));
+        }
+
         return view('events.index', compact('events', 'categories', 'totalEvents'));
     }
 
