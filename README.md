@@ -86,3 +86,18 @@ Alternatively, you can register a new account through the **Sign Up** page.
 New users are registered as **Attendees** by default.
 
 ---
+
+## 🧪 Running Tests
+### Run All Tests
+1. Run all unit and feature tests at once:
+   ```bash
+   php artisan test
+2. Run Specific Test Files
+   ```bash
+    php artisan test tests/Feature/GuestAccessTest.php
+    php artisan test tests/Feature/AttendeeActionsTest.php
+    php artisan test tests/Feature/OrganiserActionsTest.php
+    php artisan test tests/Feature/AjaxCategoryFilterTest.php
+    php artisan test tests/Feature/Auth/RegistrationTest.php
+
+---
