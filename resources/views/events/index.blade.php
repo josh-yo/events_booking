@@ -8,13 +8,13 @@
             <div class="filter">
                 <h5 class="filter-title">FILTER</h5>
                 <ul class="list-group">
-                    <li class="list-group-item filter-item" data-tag="all">
+                    <li class="list-group-item filter-item" data-tag="all" data-url="{{ url('/') }}">
                         <span>All</span>
                         <span class="badge float-end item-amount">( {{ $totalEvents }} )</span>
                     </li>
                     <!-- Categories -->
                     @foreach($categories as $category)
-                        <li class="list-group-item filter-item" data-tag="{{ $category->id }}">
+                        <li class="list-group-item filter-item" data-tag="{{ $category->id }}" data-url="{{ url('events/filter/'.$category->id) }}">
                             <span>{{ $category->name }}</span>
                             <span class="badge float-end item-amount">( {{ $category->events_count }} )</span>
                         </li>
@@ -72,8 +72,9 @@
                 // add active class to the currently clicked item
                 this.classList.add('active-category');
 
-                const categoryId = this.dataset.tag;
-                fetch(`/events/filter/${categoryId}`, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                // const categoryId = this.dataset.tag;
+                const targetUrl = this.dataset.url;
+                fetch(targetUrl, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
                     .then(response => response.text())
                     .then(html => {
                         document.getElementById('eventList').innerHTML = html;
@@ -89,7 +90,7 @@
             document.querySelectorAll('#eventList .pagination a').forEach(link => {
                 link.addEventListener('click', function (e) {
                     e.preventDefault();
-                    fetch(this.href, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                    fetch(this.getAttribute('href'), { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
                         .then(response => response.text())
                         .then(html => {
                             document.getElementById('eventList').innerHTML = html;
