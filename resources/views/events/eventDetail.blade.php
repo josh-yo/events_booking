@@ -82,6 +82,7 @@
                         data-bs-toggle="modal" 
                         data-bs-target="#deleteModal"
                         data-id="{{ $event->id }}"
+                        data-url="{{ route('events.destroy', $event->id) }}"
                         data-title="{{ $event->title }}">
                         Delete
                     </button>

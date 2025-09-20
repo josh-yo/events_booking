@@ -34,12 +34,13 @@
             var button = event.relatedTarget;
             var eventId = button.getAttribute('data-id');
             var eventTitle = button.getAttribute('data-title');
+            var targetUrl = button.getAttribute('data-url');
 
             // update modal title
             deleteModal.querySelector('#modal-event-title').textContent = eventTitle;
 
             // update delete form action
-            deleteModal.querySelector('#delete-form').action = '/events/' + eventId;
+            deleteModal.querySelector('#delete-form').action = targetUrl;
         });
     });
     </script>
